@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import { Route, Switch } from "react-router-dom";
+import { withRouter } from "react-router";
+import { render } from "react-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import {connect} from "react-redux";
+import {loadCalcal, createCalcal} from "./redux/modules/calendar"
+import AddPlan from "./AddPlan"
+import Main from "./Main"
+import Modal from "./Modal"
+import { firestore } from "./firebase";
+
 
 function App() {
   return (
+    <Switch>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Route exact path="/" component={Main} />
+      <Route path="/addplan" component={AddPlan} />
+      <Route path="/modal" component={Modal}/>
     </div>
+    </Switch>
   );
 }
 
-export default App;
+export default (withRouter(App));
